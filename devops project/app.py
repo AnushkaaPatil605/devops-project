@@ -1,3 +1,7 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
 def calculate_grade(marks):
     if marks >= 75:
         return "Distinction"
@@ -8,12 +12,16 @@ def calculate_grade(marks):
     else:
         return "Fail"
 
-students = {
-    "Anushka": 82,
-    "Rahul": 55,
-    "Priya": 33
-}
+@app.route("/")
+def home():
+    students = {
+        "Anushka": 82,
+        "Rahul": 55,
+        "Priya": 33
+    }
+
+    result = {name: calculate_grade(marks) for name, marks in students.items()}
+    return jsonify(result)
 
 if __name__ == "__main__":
-    for name, marks in students.items():
-        print(f"{name}: {calculate_grade(marks)}")
+    app.run(host="0.0.0.0", port=5000)
