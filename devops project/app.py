@@ -14,5 +14,6 @@ students = {
     "Priya": 33
 }
 
-for name, marks in students.items():
-    print(f"{name}: {calculate_grade(marks)}")
+if __name__ == "__main__":
+    for name, marks in students.items():
+        print(f"{name}: {calculate_grade(marks)}")
